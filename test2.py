@@ -1,9 +1,14 @@
-print("HELLO")
-print("Nowy tekst")
-print("Line 3")
-print("test")
-print("test4")
-print("test4")
-print("test4")
-print("test4")
-print("test4")
+from mrjob.job import MRJob
+
+class MRWorldCount123(MRJob):
+    def mapper(self, _,line):
+        yield  'chars', len(line)
+        yield 'words',len(line.split())
+
+    def reducer(self,key,values):
+        yield key, sum(values)
+
+if __name__== '__main__':
+    MRWorldCount123.run()
+
+#print("test")
